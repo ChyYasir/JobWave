@@ -1,0 +1,3 @@
+[submodule "server/9-jobwave-shared"]
+	path = server/9-jobwave-shared
+	url = https://github.com/ChyYasir/jobwave-shared
