@@ -1,10 +1,8 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "importHelpers": true,
-    "lib": ["dom", "esnext"],
-    "module": "esnext",
+    "target": "ES2015",
+    "lib": ["dom", "ES2015"],
+    "module": "CommonJS",
     "baseUrl": ".",
     "outDir": "./build",
     "rootDir": ".",
@@ -26,7 +24,5 @@
     "paths": {
       "@notifications/*": ["src/*"]
     }
-  },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  }
 }
