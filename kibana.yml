@@ -10,7 +10,7 @@ monitoring.ui.container.elasticsearch.enabled: true
 xpack.fleet.enabled: true # Enable Fleet in Kibana
 xpack.fleet.agents.enabled: true # Enable management of agents
 xpack.fleet.agents.elasticsearch.hosts: ["http://elasticsearch_container:9200"]
-# xpack.fleet.agents.fleet_server.hosts: ["http://fleet_server:9243"]
+xpack.fleet.agents.fleet_server.hosts: ["http://fleet_server:9243"]
 xpack.reporting.roles.enabled: false
 
 xpack.encryptedSavedObjects.encryptionKey: "this-is-not-a-real-key-but-gets-the-job-done"
@@ -33,3 +33,5 @@ xpack.fleet.agentPolicies:
         id: default-apm
         package:
           name: apm
+## Misc
+elasticsearch.requestTimeout: 90000
