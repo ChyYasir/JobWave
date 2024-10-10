@@ -10,7 +10,7 @@ import { healthRoutes } from '@notifications/routes';
 import { checkConnection } from '@notifications/elasticserach';
 import { createConnection } from '@notifications/queues/connection';
 import { Channel } from 'amqplib';
-import { consumeAuthEmailMessages } from '@notifications/queues/email.consumer';
+import { consumeAuthEmailMessages, consumeOrderEmailMessages } from '@notifications/queues/email.consumer';
 
 const SERVER_PORT = 4001;
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'notificationServer', 'debug');
@@ -26,11 +26,15 @@ export function start(app: Application): void {
 async function startQueues(): Promise<void> {
   const emailChannel: Channel = (await createConnection()) as Channel;
   await consumeAuthEmailMessages(emailChannel);
-
+  await consumeOrderEmailMessages(emailChannel);
   // producing a dummy message
   await emailChannel.assertExchange('jobber-email-notification', 'direct');
-  const message = JSON.stringify({ name: 'jobwave', service: 'notification service' });
-  emailChannel.publish('jobber-email-notification', 'auth-email', Buffer.from(message));
+  const messageAuth = JSON.stringify({ name: 'jobwave', service: 'auth notification service' });
+  emailChannel.publish('jobber-email-notification', 'auth-email', Buffer.from(messageAuth));
+
+  await emailChannel.assertExchange('jobber-order-notification', 'direct');
+  const messageOrder = JSON.stringify({ name: 'jobwave', service: 'order notification service' });
+  emailChannel.publish('jobber-order-notification', 'order-email', Buffer.from(messageOrder));
 }
 
 function startElasticSearch(): void {
