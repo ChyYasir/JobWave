@@ -1,5 +1,5 @@
 import 'express-async-errors';
-import { winstonLogger } from '@ChyYasir/jobwave-shared';
+import { IEmailMessageDetails, winstonLogger } from '@ChyYasir/jobwave-shared';
 import { Logger } from 'winston';
 import http from 'http';
 
@@ -27,9 +27,16 @@ async function startQueues(): Promise<void> {
   const emailChannel: Channel = (await createConnection()) as Channel;
   await consumeAuthEmailMessages(emailChannel);
   await consumeOrderEmailMessages(emailChannel);
+
+  const verificationLink = `${config.CLIENT_URL}/confirm_email?v_token=1234353245rr`;
+  const messageDetails: IEmailMessageDetails = {
+    receiverEmail: `${config.SENDER_EMAIL}`,
+    verifyLink: verificationLink,
+    template: 'verifyEmail'
+  };
   // producing a dummy message
   await emailChannel.assertExchange('jobber-email-notification', 'direct');
-  const messageAuth = JSON.stringify({ name: 'jobwave', service: 'auth notification service' });
+  const messageAuth = JSON.stringify(messageDetails);
   emailChannel.publish('jobber-email-notification', 'auth-email', Buffer.from(messageAuth));
 
   await emailChannel.assertExchange('jobber-order-notification', 'direct');

@@ -1,8 +1,9 @@
-import { winstonLogger } from '@ChyYasir/jobwave-shared';
+import { IEmailLocals, winstonLogger } from '@ChyYasir/jobwave-shared';
 import { config } from '@notifications/config';
 import { Channel, ConsumeMessage } from 'amqplib';
 import { Logger } from 'winston';
 import { createConnection } from '@notifications/queues/connection';
+import { sendEmail } from '@notifications/queues/mail.transport';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'emailConsumer', 'debug');
 
@@ -20,6 +21,16 @@ async function consumeAuthEmailMessages(channel: Channel): Promise<void> {
     channel.consume(jobberQueue.queue, async (msg: ConsumeMessage | null) => {
       console.log(JSON.parse(msg!.content.toString()));
       // send emails
+      const { receiverEmail, username, verifyLink, resetLink, template } = JSON.parse(msg!.content.toString());
+      const locals: IEmailLocals = {
+        appLink: `${config.CLIENT_URL}`,
+        appIcon: 'https://i.ibb.co/Kyp2m0t/cover.png',
+        username,
+        verifyLink,
+        resetLink
+      };
+
+      await sendEmail(template, receiverEmail, locals);
       // acknowledge
 
       channel.ack(msg!);
