@@ -39,9 +39,9 @@ async function startQueues(): Promise<void> {
   const messageAuth = JSON.stringify(messageDetails);
   emailChannel.publish('jobber-email-notification', 'auth-email', Buffer.from(messageAuth));
 
-  await emailChannel.assertExchange('jobber-order-notification', 'direct');
-  const messageOrder = JSON.stringify({ name: 'jobwave', service: 'order notification service' });
-  emailChannel.publish('jobber-order-notification', 'order-email', Buffer.from(messageOrder));
+  // await emailChannel.assertExchange('jobber-order-notification', 'direct');
+  // const messageOrder = JSON.stringify({ name: 'jobwave', service: 'order notification service' });
+  // emailChannel.publish('jobber-order-notification', 'order-email', Buffer.from(messageOrder));
 }
 
 function startElasticSearch(): void {
