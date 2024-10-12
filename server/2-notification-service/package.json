@@ -16,6 +16,7 @@
     "@types/amqplib": "^0.10.5",
     "@types/email-templates": "^10.0.4",
     "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.13",
     "@types/nodemailer": "^6.4.16",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
     "@typescript-eslint/parser": "^8.8.0",
