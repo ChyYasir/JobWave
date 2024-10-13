@@ -4,7 +4,7 @@ import { Logger } from 'winston';
 import { config } from '@notifications/config';
 import nodemailer, { Transporter } from 'nodemailer';
 import Email from 'email-templates';
-import { IEmailLocals, winstonLogger } from '@ChyYasir/jobwave-shared';
+import { IEmailLocals, winstonLogger } from '@notifications/interfaces';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'mailTransportHelper', 'debug');
 

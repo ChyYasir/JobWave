@@ -1,5 +1,5 @@
 import 'express-async-errors';
-import { IEmailMessageDetails, winstonLogger } from '@ChyYasir/jobwave-shared';
+
 import { Logger } from 'winston';
 import http from 'http';
 
@@ -11,6 +11,7 @@ import { checkConnection } from '@notifications/elasticserach';
 import { createConnection } from '@notifications/queues/connection';
 import { Channel } from 'amqplib';
 import { consumeAuthEmailMessages, consumeOrderEmailMessages } from '@notifications/queues/email.consumer';
+import { IEmailMessageDetails, winstonLogger } from '@notifications/interfaces';
 
 const SERVER_PORT = 4001;
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'notificationServer', 'debug');

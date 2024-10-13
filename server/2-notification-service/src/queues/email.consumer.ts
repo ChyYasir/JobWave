@@ -1,9 +1,9 @@
-import { IEmailLocals, winstonLogger } from '@ChyYasir/jobwave-shared';
 import { config } from '@notifications/config';
 import { Channel, ConsumeMessage } from 'amqplib';
 import { Logger } from 'winston';
 import { createConnection } from '@notifications/queues/connection';
 import { sendEmail } from '@notifications/queues/mail.transport';
+import { IEmailLocals, winstonLogger } from '@notifications/interfaces';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'emailConsumer', 'debug');
 

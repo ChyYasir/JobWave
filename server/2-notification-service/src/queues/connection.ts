@@ -1,5 +1,5 @@
-import { winstonLogger } from '@ChyYasir/jobwave-shared';
 import { config } from '@notifications/config';
+import { winstonLogger } from '@notifications/interfaces';
 
 import client, { Channel, Connection } from 'amqplib';
 import { Logger } from 'winston';

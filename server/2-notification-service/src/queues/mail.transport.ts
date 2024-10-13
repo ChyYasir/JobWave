@@ -1,6 +1,6 @@
-import { IEmailLocals, winstonLogger } from '@ChyYasir/jobwave-shared';
 import { config } from '@notifications/config';
 import { emailTemplates } from '@notifications/helpers';
+import { IEmailLocals, winstonLogger } from '@notifications/interfaces';
 
 import { Logger } from 'winston';
 

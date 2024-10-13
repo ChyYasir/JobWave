@@ -1,9 +1,9 @@
-import { winstonLogger } from '@ChyYasir/jobwave-shared';
 import { Client } from '@elastic/elasticsearch';
 import { ClusterHealthResponse } from '@elastic/elasticsearch/lib/api/types';
 import { config } from '@notifications/config';
 
 import { Logger } from 'winston';
+import { winstonLogger } from '@notifications/interfaces';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'notificationElasticSearchServer', 'debug');
 
