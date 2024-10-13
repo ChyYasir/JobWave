@@ -105,8 +105,8 @@ services:
       - RABBITMQ_ENDPOINT=amqp://jobber:jobberpass@rabbitmq_container:5672
       - SENDER_EMAIL=makenna47@ethereal.email
       - SENDER_EMAIL_PASSWORD=7EK7cFdssR3RnwSNwk
-      - ELASTIC_SEARCH_URL=http://elastic:admin1234@elasticsearch_container:9200
-      - ELASTIC_APM_SERVER_URL=http://apm_server_container:8200
+      - ELASTIC_SEARCH_URL=http://elasticsearch_container:9200
+      - ELASTIC_APM_SERVER_URL=http://localhost:8200
       - ELASTIC_APM_SECRET_TOKEN=
     depends_on:
       - elasticsearch
