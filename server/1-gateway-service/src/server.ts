@@ -8,9 +8,10 @@ import helmet from 'helmet';
 import compression from 'compression';
 import { StatusCodes } from 'http-status-codes';
 import http from 'http';
+import { config } from '@gateway/config';
 
 const SERVER_PORT = 4000;
-const log: Logger = winstonLogger('http://localhost:9200', 'apiGatewayServer', 'debug');
+const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'apiGatewayServer', 'debug');
 
 export class GatewayServer {
   private app: Application;
@@ -31,9 +32,9 @@ export class GatewayServer {
     app.use(
       cookieSession({
         name: 'session',
-        keys: [],
+        keys: [`${config.SECRET_KEY_ONE}`, `${config.SECRET_KEY_TWO}`],
         maxAge: 24 * 7 * 3600000,
-        secure: false
+        secure: config.NODE_ENV !== 'development'
       })
     );
     app.use(hpp());
